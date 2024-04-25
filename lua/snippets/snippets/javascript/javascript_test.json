@@ -1,0 +1,191 @@
+{
+  "describe": {
+    "prefix": "desc",
+    "body": "describe('${1:description}', () => {\n\t${0}\n})"
+  },
+  "describe top level": {
+    "prefix": "dt",
+    "description": "Desc with it and AAA",
+    "body": [
+      "describe('${TM_FILENAME_BASE}', () => {",
+      " it('🧪 default',()=>{",
+      "    expect.hasAssertions();",
+      "    // ☣️  Arrange (всякие моки)",
+      "    ",
+      "    ",
+      "    //🔥 Act",
+      "    ${1}",
+      "  ",
+      "    //❓ Assert",
+      "    expect(2).toBe(1);",
+      "  })",
+      "",
+      "})"
+    ]
+  },
+  "describe enzyme wrapper": {
+    "prefix": "dte",
+    "description": "Desc  enzyme wrapper",
+    "body": [
+      "import React from 'react';",
+      "import { shallow } from 'enzyme';",
+      "import { vi } from 'vitest';",
+      "",
+      "",
+      "import { ${TM_FILENAME_BASE/\\.spec(\\.\\w+)?$/$1/} } from './${TM_FILENAME_BASE/\\.spec(\\.\\w+)?$/$1/}';",
+      "",
+      "",
+      "describe('spec ${TM_FILENAME_BASE/\\.spec(\\.\\w+)?$/$1/}', () => {",
+      "  it('🧪 default',()=>{",
+      "    expect.hasAssertions();",
+      "    //☣️ Arrange (всякие моки)",
+      "",
+      "    //🔥 Act",
+      "   const wrapper = shallow(<${TM_FILENAME_BASE/\\.spec(\\.\\w+)?$/$1/} />);",
+      "",
+      "    //❓ Assert",
+      "    expect(wrapper.text()).toBe('oneb');",
+      "  })",
+      "});"
+    ]
+  },
+  "describe snapshot rtr": {
+    "prefix": "dts",
+    "description": "Desc [snapshot] react test renderer",
+    "body": [
+      "import React from 'react';",
+      "import renderer from 'react-test-renderer';",
+      "",
+      "import ${1:${TM_FILENAME_BASE}} from './${1:${TM_FILENAME_BASE}}'",
+      "",
+      "",
+      "describe('spec ${1:${TM_FILENAME_BASE}}', () => {",
+      "  it('🧪 [snaphot] ${1:${TM_FILENAME_BASE}}',()=>{",
+      "    expect.hasAssertions();",
+      "    //☣️ Arrange (всякие моки)",
+      "",
+      "    //🔥 Act",
+      "    const tree = renderer.create(<${2:${TM_FILENAME_BASE}} />).toJSON();",
+      "",
+      "    //❓ Assert",
+      "    expect(tree).toMatchSnapshot();",
+      "  })",
+      "});"
+    ]
+  },
+  "it asynchronous": {
+    "prefix": "it",
+    "description": "it by AAA",
+    "body": [
+      " it('🧪 should ${0}',()=>{",
+      "    expect.hasAssertions();",
+      "    //☣️ Arrange (всякие моки)",
+      "    ",
+      "    //🔥 Act",
+      "    ${1}",
+      "  ",
+      "    //❓ Assert",
+      "    expect(2).toBe(1);",
+      "  })",
+      ""
+    ]
+  },
+  "vitest mock useState ts": {
+    "prefix": "vmst",
+    "body": [
+      "",
+      "vi.mock('react', async (importOriginal) => {",
+      "  const mod = (await importOriginal()) as Record<string, unknown>; // Явное приведение к объекту;",
+      "  return {",
+      "    ...mod,",
+      "    useState: vi.fn(),",
+      "  };",
+      "});",
+      ""
+    ]
+  },
+  "vitest mock useReactQuery": {
+    "prefix": "vmrq",
+    "body": [
+      "import {useMutationAdaptor, useQueryAdaptor } from 'core/utils/hooks/useReactQuery';",
+      "",
+      "vi.mock('core/utils/hooks/useReactQuery');",
+      "",
+      "",
+      "/**",
+      "* Mock Default.",
+      "*",
+      "* @returns {void}",
+      "*/",
+      "const mockDefault = () => {",
+      " (useMutationAdaptor as jest.Mock).mockImplementation((fn: unknown) => [fn]);",
+      "(useQueryAdaptor as jest.Mock).mockImplementation(",
+      " (",
+      "  keys: unknown[],",
+      " fn: (v: unknown) => unknown,",
+      "options: { onSuccess?: (v: unknown) => unknown },",
+      ") => ({",
+      " data: options?.onSuccess ? options.onSuccess(fn(keys[1])) : fn(keys[1]),",
+      "  }),",
+      ");",
+      "};",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "jest mock": {
+    "prefix": "jm",
+    "body": "jest.mock('${1:url}')"
+  },
+  "it.todo": {
+    "prefix": "itt",
+    "body": "it.todo('${1:description}')"
+  },
+  "it with a callback": {
+    "prefix": "itd",
+    "body": "it('${1:description}', (done) => {\n\t${0}\n})"
+  },
+  "it synchronous": {
+    "prefix": "its",
+    "body": "it('${1:description}', () => {\n\t${0}\n})"
+  },
+  "before": {
+    "prefix": "bf",
+    "body": "before(async () => {\n\t${0}\n})"
+  },
+  "beforeAll": {
+    "prefix": "ba",
+    "body": "beforeAll(async () => {\n\t${0}\n})"
+  },
+  "beforeEach": {
+    "prefix": "bfe",
+    "body": "beforeEach(async () => {\n\t${0}\n})"
+  },
+  "after": {
+    "prefix": "aft",
+    "body": "after(() => {\n\t${0}\n})"
+  },
+  "afterEach": {
+    "prefix": "afe",
+    "body": "afterEach(() => {\n\t${0}\n})"
+  },
+  "mockDefault": {
+    "prefix": "mcd",
+    "body": [
+      "/**",
+      "* Mock Default.",
+      "*",
+      "* @returns {void}",
+      "*/",
+      "const mockDefault = () => {",
+      "",
+      "}"
+    ]
+  },
+  "vi mock": {
+    "prefix": "vm",
+    "body": "vi.mock('${1:url}')"
+  }
+}

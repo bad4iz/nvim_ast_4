@@ -78,4 +78,6 @@ return {
       )
     end,
   },
+  "folke/tokyonight.nvim",
+  { "wakatime/vim-wakatime" },
 }
